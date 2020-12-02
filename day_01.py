@@ -4,7 +4,7 @@ from itertools import combinations
 
 
 def read_input(file):
-    with open(file, "r") as f:
+    with open(file) as f:
         return set(int(line) for line in f)
 
 

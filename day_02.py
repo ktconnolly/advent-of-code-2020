@@ -11,7 +11,7 @@ def part_one():
         minimum, maximum, char, password = parse_policy(line)
         return int(minimum) <= password.count(char) <= int(maximum)
 
-    with open("inputs/day_02.txt", "r") as f:
+    with open("inputs/day_02.txt") as f:
         return sum(is_valid(l.strip()) for l in f)
 
 
@@ -20,5 +20,5 @@ def part_two():
         pos_1, pos_2, char, password = parse_policy(line)
         return (password[int(pos_1) - 1] == char) != (password[int(pos_2) - 1] == char)
 
-    with open("inputs/day_02.txt", "r") as f:
+    with open("inputs/day_02.txt") as f:
         return sum(is_valid(l.strip()) for l in f)
