@@ -1,8 +1,6 @@
 import operator
 from functools import reduce
 
-TREE = "#"
-
 
 def get_map():
     with open("inputs/day_03.txt") as file:
@@ -10,19 +8,17 @@ def get_map():
 
 
 def traverse_map(tree_map, slope):
-    col_num = len(tree_map[0])
-    row_num = len(tree_map)
-
+    width, height = len(tree_map[0]), len(tree_map)
     row, col, trees = 0, 0, 0
-    while True:
-        row += slope[0]
-        col = (col + slope[1]) % col_num
 
-        if row >= row_num:
-            return trees
-
-        if tree_map[row][col] == TREE:
+    while row < height:
+        if tree_map[row][col] == "#":
             trees += 1
+
+        row += slope[0]
+        col = (col + slope[1]) % width
+
+    return trees
 
 
 def part_one():
