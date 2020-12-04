@@ -32,11 +32,10 @@ def get_passport_dict(passport):
 def is_valid(passport):
     passport_dict = get_passport_dict(passport)
 
-    if passport_dict.keys() != rules.keys():
-        return False
+    for field, rule in rules.items():
+        value = passport_dict.get(field)
 
-    for field, value in passport_dict.items():
-        if not rules[field](value):
+        if value is None or not rule(value):
             return False
 
     return True
