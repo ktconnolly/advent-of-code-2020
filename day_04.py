@@ -3,9 +3,12 @@ from itertools import groupby
 
 
 def get_passports():
+    def get_passport_dict(passport):
+        return dict(entry.split(":") for entry in passport if entry[:3] != "cid")
+
     with open("inputs/day_04.txt") as file:
-        group = [list(map(str.strip, group)) for key, group in groupby(file, lambda x: x != "\n") if key]
-        return [" ".join(g) for g in group]
+        passports = [list(map(str.strip, group)) for key, group in groupby(file, lambda x: x != "\n") if key]
+        return [get_passport_dict(" ".join(p).split(" ")) for p in passports]
 
 
 rules = {
@@ -19,30 +22,12 @@ rules = {
 }
 
 
-def get_passport_dict(passport):
-    fields = {}
-    for entry in passport.split(" "):
-        field, value = entry.split(":")
-        if field != "cid":
-            fields[field] = value
-
-    return fields
-
-
 def is_valid(passport):
-    passport_dict = get_passport_dict(passport)
-
-    for field, rule in rules.items():
-        value = passport_dict.get(field)
-
-        if value is None or not rule(value):
-            return False
-
-    return True
+    return all(field in passport and rule(passport[field]) for field, rule in rules.items())
 
 
 def part_one():
-    return sum(get_passport_dict(passport).keys() == rules.keys() for passport in get_passports())
+    return sum(passport.keys() == rules.keys() for passport in get_passports())
 
 
 def part_two():
