@@ -22,13 +22,13 @@ def get_seat_ids():
 
         ids.append((row * 8) + col)
 
-    return sorted(ids)
+    return ids
 
 
 def part_one():
-    return get_seat_ids()[-1]
+    return max(get_seat_ids())
 
 
 def part_two():
     ids = get_seat_ids()
-    return sum(range(ids[0], ids[-1] + 1)) - sum(ids)
+    return sum(range(min(ids), max(ids) + 1)) - sum(ids)
