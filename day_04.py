@@ -1,14 +1,13 @@
 import re
-from itertools import groupby
 
 
 def get_passports():
-    def get_passport_dict(passport):
-        return dict(entry.split(":") for entry in passport if entry[:3] != "cid")
-
     with open("inputs/day_04.txt") as file:
-        passports = [list(map(str.strip, group)) for key, group in groupby(file, lambda x: x != "\n") if key]
-        return [get_passport_dict(" ".join(p).split(" ")) for p in passports]
+        passports = [lines.replace("\n", " ") for lines in file.read().split("\n\n")]
+        return [
+            {k: v for entry in line.split() for k, v in [entry.split(':')] if k != "cid"}
+            for line in passports
+        ]
 
 
 rules = {
