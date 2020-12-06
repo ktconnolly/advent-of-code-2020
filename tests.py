@@ -5,6 +5,7 @@ import day_02
 import day_03
 import day_04
 import day_05
+import day_06
 
 
 class Tests(unittest.TestCase):
@@ -34,6 +35,12 @@ class Tests(unittest.TestCase):
 
     def test_day_05_part_2(self):
         self.assertEqual(653, day_05.part_two())
+
+    def test_day_06_part_1(self):
+        self.assertEqual(6506, day_06.part_one())
+
+    def test_day_06_part_2(self):
+        self.assertEqual(3243, day_06.part_two())
 
 
 if __name__ == "__main__":
