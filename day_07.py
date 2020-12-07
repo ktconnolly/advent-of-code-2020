@@ -1,4 +1,5 @@
 import re
+from collections import defaultdict
 
 
 def get_rules():
@@ -6,43 +7,36 @@ def get_rules():
         with open("inputs/day_07.txt") as file:
             return file.readlines()
 
-    rules = {}
+    child_to_parent = defaultdict(set)
+    parent_to_child = defaultdict(set)
     for rule in get_lines():
-        bag = re.search(r"(^\w+ \w+)", rule).group(0).strip()
-        children = re.findall(r"(\d+ \w+ \w+)", rule)
+        parent = re.match(r"(^\w+ \w+)", rule)[1]
 
-        rules[bag] = []
-        for child in children:
-            quantity = int(child[0])
-            child = [child[2:]]
-            rules[bag] += child * quantity
+        for quantity, child in re.findall(r"(\d+) (\w+ \w+)", rule):
+            child_to_parent[child].add(parent)
+            parent_to_child[parent].add((int(quantity), child))
 
-    return rules
-
-
-def contains_gold(bag, rules, cache):
-    if bag in cache:
-        return cache[bag]
-
-    for child in rules.get(bag):
-        if child == "shiny gold" or contains_gold(child, rules, cache):
-            cache[child] = True
-            return True
-
-    cache[bag] = False
-    return False
+    return child_to_parent, parent_to_child
 
 
 def part_one():
-    rules = get_rules()
-    return sum(contains_gold(bag, rules, cache={}) for bag in rules)
+    def get_parents(child, child_to_parent):
+        parents = set()
+        for parent in child_to_parent[child]:
+            parents.add(parent)
+            parents.update(get_parents(parent, child_to_parent))
+
+        return parents
+
+    rules, _ = get_rules()
+    return len(get_parents("shiny gold", rules))
 
 
 def part_two():
-    def count_children(bag, rules):
-        children = rules.get(bag)
+    def get_total(parent, parent_to_child):
         return sum(
-            count_children(child, rules) for child in children) + len(
-            children)
+            quantity + (quantity * get_total(child, parent_to_child)) for
+            quantity, child in parent_to_child[parent])
 
-    return count_children("shiny gold", get_rules())
+    _, rules = get_rules()
+    return get_total("shiny gold", rules)
