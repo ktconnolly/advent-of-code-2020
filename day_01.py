@@ -3,13 +3,13 @@ from functools import reduce
 from itertools import combinations
 
 
-def read_input(file):
-    with open(file) as f:
+def read_input():
+    with open("inputs/day_01.txt") as f:
         return set(int(line) for line in f)
 
 
 def solve(n):
-    for combo in combinations(read_input("inputs/day_01.txt"), n):
+    for combo in combinations(read_input(), n):
         if sum(combo) == 2020:
             return reduce(operator.mul, combo, 1)
 
