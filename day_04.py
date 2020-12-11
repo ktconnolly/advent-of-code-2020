@@ -1,12 +1,12 @@
 import re
 
+from utils import read_lines
+
 
 def get_passports():
-    with open("inputs/day_04.txt") as file:
-        passports = [lines.replace("\n", " ") for lines in file.read().split("\n\n")]
         return [
             {k: v for entry in line.split() for k, v in [entry.split(':')] if k != "cid"}
-            for line in passports
+            for line in [lines.replace("\n", " ") for lines in read_lines(day=4, split='\n\n')]
         ]
 
 

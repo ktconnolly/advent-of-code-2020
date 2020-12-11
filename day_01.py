@@ -2,14 +2,11 @@ import operator
 from functools import reduce
 from itertools import combinations
 
-
-def read_input():
-    with open("inputs/day_01.txt") as f:
-        return set(int(line) for line in f)
+from utils import read_ints
 
 
 def solve(n):
-    for combo in combinations(read_input(), n):
+    for combo in combinations(read_ints(day=1), n):
         if sum(combo) == 2020:
             return reduce(operator.mul, combo, 1)
 

@@ -1,6 +1,4 @@
-def read_input():
-    with open("inputs/day_09.txt") as file:
-        return [int(line) for line in file]
+from utils import read_ints
 
 
 def find_weakness(arr, target):
@@ -13,7 +11,7 @@ def find_weakness(arr, target):
 
 
 def part_one():
-    xmas = read_input()
+    xmas = read_ints(day=9)
 
     for i in range(25, len(xmas)):
         preamble = xmas[i - 25: i]
@@ -23,7 +21,7 @@ def part_one():
 
 
 def part_two():
-    xmas = read_input()
+    xmas = read_ints(day=9)
     target = part_one()
 
     for i in range(len(xmas)):

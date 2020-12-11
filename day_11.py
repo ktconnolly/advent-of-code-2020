@@ -1,3 +1,5 @@
+from utils import read_lines
+
 OCCUPIED = "#"
 UNOCCUPIED = "L"
 SEAT_STATES = (OCCUPIED, UNOCCUPIED)
@@ -7,8 +9,7 @@ DIRECTIONS = [(0, -1), (0, 1), (-1, 0), (1, 0), (-1, -1), (-1, 1), (1, -1), (1, 
 
 class FloorPlan:
     def __init__(self):
-        with open("inputs/day_11.txt") as file:
-            self.plan = [list(line.strip()) for line in file]
+        self.plan = [list(line) for line in read_lines(day=11)]
 
     def get(self, row, cell):
         if not self.is_inbounds(row, cell):
@@ -83,9 +84,11 @@ def run(part):
                 else:
                     neighbours = floor_plan.get_visible_seats(row, col)
 
-                if seat == OCCUPIED and sum(seat == OCCUPIED for seat in neighbours) >= tolerance:
+                if seat == OCCUPIED and sum(
+                        seat == OCCUPIED for seat in neighbours) >= tolerance:
                     updates.append((row, col, UNOCCUPIED))
-                elif seat == UNOCCUPIED and all(seat == UNOCCUPIED for seat in neighbours):
+                elif seat == UNOCCUPIED and all(
+                        seat == UNOCCUPIED for seat in neighbours):
                     updates.append((row, col, OCCUPIED))
 
         if updates:

@@ -1,10 +1,7 @@
 import operator
 from functools import reduce
 
-
-def get_map():
-    with open("inputs/day_03.txt") as file:
-        return [line.strip() for line in file]
+from utils import read_lines
 
 
 def traverse_map(tree_map, slope):
@@ -22,11 +19,11 @@ def traverse_map(tree_map, slope):
 
 
 def part_one():
-    return traverse_map(get_map(), (1, 3))
+    return traverse_map(read_lines(day=3), (1, 3))
 
 
 def part_two():
-    tree_map = get_map()
+    tree_map = read_lines(3)
     slopes = [
         (1, 1),
         (1, 3),
@@ -34,4 +31,5 @@ def part_two():
         (1, 7),
         (2, 1)
     ]
-    return reduce(operator.mul, (traverse_map(tree_map, slope) for slope in slopes), 1)
+    return reduce(operator.mul,
+                  (traverse_map(tree_map, slope) for slope in slopes), 1)

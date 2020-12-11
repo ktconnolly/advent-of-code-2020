@@ -1,16 +1,14 @@
-def read_input():
-    with open("inputs/day_10.txt") as file:
-        return [int(line) for line in file]
+from utils import read_ints
 
 
 def part_one():
-    adapters = [0] + sorted(read_input())
+    adapters = [0] + sorted(read_ints(day=10))
     diffs = [adapters[i] - adapters[i - 1] for i in range(1, len(adapters))]
     return diffs.count(1) * (diffs.count(3) + 1)
 
 
 def part_two():
-    adapters = sorted(read_input())
+    adapters = sorted(read_ints(day=10))
 
     routes = [0] * (adapters[-1] + 1)
     routes[0] = 1

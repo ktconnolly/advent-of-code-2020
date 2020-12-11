@@ -1,15 +1,13 @@
 import re
 from collections import defaultdict
 
+from utils import read_lines
+
 
 def get_rules():
-    def get_lines():
-        with open("inputs/day_07.txt") as file:
-            return file.readlines()
-
     child_to_parent = defaultdict(set)
     parent_to_child = defaultdict(set)
-    for rule in get_lines():
+    for rule in read_lines(day=7):
         parent = re.match(r"(^\w+ \w+)", rule)[1]
 
         for quantity, child in re.findall(r"(\d+) (\w+ \w+)", rule):

@@ -1,6 +1,8 @@
+from utils import read_lines
+
+
 def get_answers():
-    with open("inputs/day_06.txt") as file:
-        return [line.splitlines() for line in file.read().split("\n\n")]
+    return [line.splitlines() for line in read_lines(day=6, split="\n\n")]
 
 
 def part_one():
@@ -8,4 +10,5 @@ def part_one():
 
 
 def part_two():
-    return sum(len(set.intersection(*map(set, group))) for group in get_answers())
+    return sum(
+        len(set.intersection(*map(set, group))) for group in get_answers())

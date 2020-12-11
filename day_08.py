@@ -1,6 +1,4 @@
-def get_instructions():
-    with open("inputs/day_08.txt") as file:
-        return [line.strip().split() for line in file]
+from utils import read_lines
 
 
 def run(instructions):
@@ -24,12 +22,13 @@ def run(instructions):
 
 
 def part_one():
-    return run(get_instructions())[0]
+    instructions = [line.split() for line in read_lines(day=8)]
+    return run(instructions)[0]
 
 
 def part_two():
     substitutions = {"jmp": "nop", "nop": "jmp"}
-    instructions = get_instructions()
+    instructions = [line.split() for line in read_lines(day=8)]
 
     for i, (op, _) in enumerate(instructions):
         if op not in substitutions:
