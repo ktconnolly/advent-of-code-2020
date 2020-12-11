@@ -5,11 +5,6 @@ FLOOR = "."
 DIRECTIONS = [(0, -1), (0, 1), (-1, 0), (1, 0), (-1, -1), (-1, 1), (1, -1), (1, 1)]
 
 
-def get_floor_plan():
-    with open("inputs/day_11.txt") as file:
-        return [list(line.strip()) for line in file]
-
-
 class FloorPlan:
     def __init__(self):
         with open("inputs/day_11.txt") as file:
@@ -24,12 +19,9 @@ class FloorPlan:
     def is_inbounds(self, row, col):
         return 0 <= row < len(self.plan) and 0 <= col < len(self.plan[0])
 
-    def update(self, to_empty, to_occupy):
-        for row, col in to_empty:
-            self.plan[row][col] = UNOCCUPIED
-
-        for row, col in to_occupy:
-            self.plan[row][col] = OCCUPIED
+    def update(self, updates):
+        for row, col, update in updates:
+            self.plan[row][col] = update
 
     def get_visible_seats(self, row, col):
         return [
@@ -77,7 +69,7 @@ def run(part):
     tolerance = 4 if part == 1 else 5
 
     while True:
-        to_occupy, to_empty = [], []
+        updates = []
 
         for row in range(rows):
             for col in range(cols):
@@ -92,14 +84,14 @@ def run(part):
                     neighbours = floor_plan.get_visible_seats(row, col)
 
                 if seat == OCCUPIED and sum(seat == OCCUPIED for seat in neighbours) >= tolerance:
-                    to_empty.append((row, col))
+                    updates.append((row, col, UNOCCUPIED))
                 elif seat == UNOCCUPIED and all(seat == UNOCCUPIED for seat in neighbours):
-                    to_occupy.append((row, col))
+                    updates.append((row, col, OCCUPIED))
 
-        if not to_empty and not to_occupy:
-            return floor_plan.get_occupied_count()
+        if updates:
+            floor_plan.update(updates)
         else:
-            floor_plan.update(to_empty, to_occupy)
+            return floor_plan.get_occupied_count()
 
 
 def part_one():
