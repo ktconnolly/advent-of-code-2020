@@ -30,6 +30,9 @@ class Tests(unittest.TestCase):
     def test_day_03_part_1(self):
         self.assertEqual(216, day_03.part_one())
 
+    def test_day_03_part_2(self):
+        self.assertEqual(6708199680, day_03.part_two())
+
     def test_day_04_part_1(self):
         self.assertEqual(237, day_04.part_one())
 
