@@ -35,13 +35,6 @@ def move(coords, direction, units):
         coords[0] -= units
 
 
-def rotate_waypoint(coords, direction):
-    if direction == RIGHT:
-        return [coords[1], -coords[0]]
-    elif direction == LEFT:
-        return [-coords[1], coords[0]]
-
-
 def part_one():
     current_direction = EAST
     ship = [0, 0]
@@ -72,6 +65,9 @@ def part_two():
             move(waypoint, action, units)
         elif action in (LEFT, RIGHT):
             for i in range(units // 90):
-                waypoint = rotate_waypoint(waypoint, action)
+                if action == RIGHT:
+                    waypoint = [waypoint[1], -waypoint[0]]
+                elif action == LEFT:
+                    waypoint = [-waypoint[1], waypoint[0]]
 
     return abs(ship[0]) + abs(ship[1])
