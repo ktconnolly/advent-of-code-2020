@@ -5,6 +5,8 @@ from utils import read_lines
 
 
 class Program:
+    MEM_RE = re.compile(r"mem\[(\d+)] = (\d+)")
+
     def __init__(self):
         self.instructions = read_lines(day=14)
         self.memory = {}
@@ -15,7 +17,7 @@ class Program:
             if i.startswith("mask"):
                 self.mask = i.replace("mask = ", "")
             else:
-                yield re.findall(r"mem\[(\d+)] = (\d+)", i)[0]
+                yield re.findall(self.MEM_RE, i)[0]
 
     def set(self, addr, val):
         self.memory[addr] = val
