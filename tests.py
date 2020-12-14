@@ -13,6 +13,7 @@ import day_10
 import day_11
 import day_12
 import day_13
+import day_14
 
 
 class Tests(unittest.TestCase):
@@ -93,6 +94,12 @@ class Tests(unittest.TestCase):
 
     def test_day_13_part_2(self):
         self.assertEqual(939490236001473, day_13.part_two())
+
+    def test_day_14_part_1(self):
+        self.assertEqual(9296748256641, day_14.part_one())
+
+    def test_day_14_part_2(self):
+        self.assertEqual(4877695371685, day_14.part_two())
 
 
 if __name__ == "__main__":
