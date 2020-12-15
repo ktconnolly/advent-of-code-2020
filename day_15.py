@@ -1,34 +1,17 @@
-from collections import defaultdict, deque
-
 from utils import read_lines
 
 
-def get_input():
-    numbers = [int(n) for n in read_lines(day=15, split=",")]
-
-    history = defaultdict(lambda: deque(maxlen=2))
-    for i, n in enumerate(numbers, start=1):
-        history[n].append(i)
-
-    turn = len(numbers) + 1
-    curr = numbers[-1]
-    return turn, curr, history
-
-
 def run(limit):
-    turn, curr, history = get_input()
+    numbers = [int(n) for n in read_lines(day=15, split=",")]
+    history = {n: i for i, n in enumerate(numbers[:-1], start=1)}
+    prev_num = numbers[-1]
 
-    while turn <= limit:
-        if len(history[curr]) != 2:
-            curr = 0
-            history[curr].append(turn)
-        else:
-            curr = max(history[curr]) - min(history[curr])
-            history[curr].append(turn)
+    for turn in range(len(numbers), limit):
+        next_num = turn - history.get(prev_num, turn)
+        history[prev_num] = turn
+        prev_num = next_num
 
-        turn += 1
-
-    return curr
+    return prev_num
 
 
 def part_one():
