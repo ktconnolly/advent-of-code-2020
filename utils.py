@@ -8,3 +8,7 @@ def read_lines(day, split=None):
         if split is None:
             return [line.strip() for line in file]
         return [line.strip() for line in file.read().split(split)]
+
+
+def flatten_list(to_flatten):
+    return [item for sublist in to_flatten for item in sublist]
