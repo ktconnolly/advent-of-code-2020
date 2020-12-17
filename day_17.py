@@ -31,29 +31,25 @@ def get_active_neighbours_map(active, dimensions):
 
 
 def cycle(active, dimensions):
-    active_neighbours = get_active_neighbours_map(active, dimensions)
+    neighbours = get_active_neighbours_map(active, dimensions)
 
-    active = [cube for cube in active if active_neighbours[cube] in (2, 3)]
+    active = set(cube for cube in active if neighbours[cube] in (2, 3))
+    to_activate = set(cube for cube, neighbour in neighbours.items()
+                      if cube not in active and neighbour == 3)
 
-    to_activate = [cube for cube, active_neighbours in active_neighbours.items()
-                   if cube not in active and active_neighbours == 3]
+    return active | to_activate
 
-    return set(active) | set(to_activate)
+
+def run(dimensions):
+    cubes = get_active(dimensions)
+    for _ in range(6):
+        cubes = cycle(cubes, dimensions)
+    return len(cubes)
 
 
 def part_one():
-    dimensions = 3
-    cubes = get_active(dimensions)
-    for _ in range(6):
-        cubes = cycle(cubes, dimensions)
-
-    return len(cubes)
+    return run(dimensions=3)
 
 
 def part_two():
-    dimensions = 4
-    cubes = get_active(dimensions)
-    for _ in range(6):
-        cubes = cycle(cubes, dimensions)
-
-    return len(cubes)
+    return run(dimensions=4)
