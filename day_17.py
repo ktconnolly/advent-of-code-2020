@@ -34,8 +34,8 @@ def cycle(active, dimensions):
     neighbours = get_active_neighbours_map(active, dimensions)
 
     active = set(cube for cube in active if neighbours[cube] in (2, 3))
-    to_activate = set(cube for cube, neighbour in neighbours.items()
-                      if cube not in active and neighbour == 3)
+    to_activate = set(cube for cube, active_neighbours in neighbours.items()
+                      if cube not in active and active_neighbours == 3)
 
     return active | to_activate
 
