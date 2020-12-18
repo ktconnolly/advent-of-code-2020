@@ -103,3 +103,7 @@ def part_one():
 
 def part_two():
     return run(2)
+
+
+assert part_one() == 2273
+assert part_two() == 2064

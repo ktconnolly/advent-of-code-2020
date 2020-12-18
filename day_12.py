@@ -71,3 +71,7 @@ def part_two():
                     waypoint = [-waypoint[1], waypoint[0]]
 
     return abs(ship[0]) + abs(ship[1])
+
+
+assert part_one() == 1710
+assert part_two() == 62045

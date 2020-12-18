@@ -22,3 +22,7 @@ def part_two():
         return (password[int(pos_1) - 1] == char) != (password[int(pos_2) - 1] == char)
 
     return sum(is_valid(line) for line in read_lines(day=2))
+
+
+assert part_one() == 465
+assert part_two() == 294

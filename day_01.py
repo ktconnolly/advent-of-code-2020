@@ -17,3 +17,7 @@ def part_one():
 
 def part_two():
     return solve(3)
+
+
+assert part_one() == 494475
+assert part_two() == 267520550

@@ -27,3 +27,7 @@ def part_two():
         increment *= time
 
     return pos
+
+
+assert part_one() == 246
+assert part_two() == 939490236001473

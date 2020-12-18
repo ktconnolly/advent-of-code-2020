@@ -89,3 +89,7 @@ def part_two():
     departure_entries = [my_ticket[i] for i in get_departure_indexes(known_fields)]
 
     return reduce(operator.mul, departure_entries, 1)
+
+
+assert part_one() == 30869
+assert part_two() == 4381476149273

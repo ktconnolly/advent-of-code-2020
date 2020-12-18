@@ -53,3 +53,7 @@ def part_one():
 
 def part_two():
     return run(dimensions=4)
+
+
+assert part_one() == 359
+assert part_two() == 2228

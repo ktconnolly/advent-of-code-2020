@@ -17,3 +17,7 @@ def part_two():
         routes[a] = routes[a - 3] + routes[a - 2] + routes[a - 1]
 
     return routes[-1]
+
+
+assert part_one() == 2176
+assert part_two() == 18512297918464

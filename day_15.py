@@ -20,3 +20,7 @@ def part_one():
 
 def part_two():
     return run(limit=30000000)
+
+
+assert part_one() == 206
+assert part_two() == 955

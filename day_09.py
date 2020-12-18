@@ -28,3 +28,7 @@ def part_two():
         weakness = find_weakness(xmas[i:], target)
         if weakness:
             return weakness
+
+
+assert part_one() == 373803594
+assert part_two() == 51152360

@@ -33,3 +33,7 @@ def part_two():
     ]
     return reduce(operator.mul,
                   (traverse_map(tree_map, slope) for slope in slopes), 1)
+
+
+assert part_one() == 216
+assert part_two() == 6708199680

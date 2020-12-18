@@ -4,10 +4,10 @@ from utils import read_lines
 
 
 def get_passports():
-        return [
-            {k: v for entry in line.split() for k, v in [entry.split(':')] if k != "cid"}
-            for line in [lines.replace("\n", " ") for lines in read_lines(day=4, split='\n\n')]
-        ]
+    return [
+        {k: v for entry in line.split() for k, v in [entry.split(':')] if k != "cid"}
+        for line in [lines.replace("\n", " ") for lines in read_lines(day=4, split='\n\n')]
+    ]
 
 
 rules = {
@@ -31,3 +31,7 @@ def part_one():
 
 def part_two():
     return sum(is_valid(passport) for passport in get_passports())
+
+
+assert part_one() == 237
+assert part_two() == 172

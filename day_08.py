@@ -41,3 +41,7 @@ def part_two():
             return accumulator
 
         instructions[i][0] = op
+
+
+assert part_one() == 1548
+assert part_two() == 1375

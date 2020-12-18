@@ -71,3 +71,7 @@ def part_two():
             program.set(masked_address, val)
 
     return program.sum_values()
+
+
+assert part_one() == 9296748256641
+assert part_two() == 4877695371685

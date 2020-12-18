@@ -12,3 +12,7 @@ def part_one():
 def part_two():
     return sum(
         len(set.intersection(*map(set, group))) for group in get_answers())
+
+
+assert part_one() == 6506
+assert part_two() == 3243

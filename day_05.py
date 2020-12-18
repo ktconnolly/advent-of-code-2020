@@ -30,3 +30,7 @@ def part_one():
 def part_two():
     ids = get_seat_ids()
     return sum(range(min(ids), max(ids) + 1)) - sum(ids)
+
+
+assert part_one() == 951
+assert part_two() == 653

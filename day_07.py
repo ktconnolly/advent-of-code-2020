@@ -38,3 +38,7 @@ def part_two():
 
     _, rules = get_rules()
     return get_total("shiny gold", rules)
+
+
+assert part_one() == 179
+assert part_two() == 18925
