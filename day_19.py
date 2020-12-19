@@ -60,7 +60,7 @@ class CompoundRule(Rule):
                 candidate = candidate[result.got:]
             else:
                 # short circuit if not successful
-                return result
+                return overall_result
 
         return overall_result
 
