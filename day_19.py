@@ -65,7 +65,7 @@ class CompoundRule(Rule):
         return overall_result
 
     def __repr__(self):
-        return f"{' AND '.join(self.rules)}"
+        return f"{[rule for rule in self.rules]}"
 
 
 class OrRule(Rule):
